@@ -47,7 +47,6 @@
           ctx.beginPath();
           ctx.arc(600,100, 50, 0, 2 * Math.PI);
           ctx.stroke();
-          */
 
           ctx.font = "80px Arial";
           ctx.fillStyle = "rgb(255,100,100)";
@@ -95,6 +94,149 @@
             ctx.arc(e.offsetX,e.offsetY , 25, 0, 2 * Math.PI);
             ctx.stroke();
             ctx.fill();
+          });
+
+          var figura = false;
+          var color;
+          ctx.strokeStyle = "rgb(100, 100, 100)";
+          
+          canvas.addEventListener("mouseover", function (e){
+            color = "rgba(" + Math.random()*255 + "," + Math.random()*255 + "," + Math.random()*255 + ", 0.8)";
+          });
+
+          canvas.addEventListener("click", function (e){
+
+            ctx.fillStyle = color;
+
+            if(figura){
+              ctx.beginPath();
+              ctx.arc(e.offsetX,e.offsetY , 25, 0, 2 * Math.PI);
+              ctx.stroke();
+              ctx.fill();
+            }else{
+              ctx.fillRect(e.offsetX-25,e.offsetY-25,50,50);
+            }
+          });
+
+          canvas.addEventListener("mouseout", function (e){
+            figura = !figura;
+          });
+
+          var figura = false;
+          var color;
+          ctx.strokeStyle = "rgb(100, 100, 100)";
+          
+          canvas.addEventListener("mouseover", function (e){
+            color = "rgba(" + Math.random()*255 + "," + Math.random()*255 + "," + Math.random()*255 + ", 0.8)";
+          });
+
+          canvas.addEventListener("click", function (e){
+
+            ctx.fillStyle = color;
+
+            if(figura){
+              ctx.beginPath();
+              ctx.arc(e.offsetX,e.offsetY , 25, 0, 2 * Math.PI);
+              ctx.stroke();
+              ctx.fill();
+            }else{
+              ctx.fillRect(e.offsetX-25,e.offsetY-25,50,50);
+            }
+          });
+
+          canvas.addEventListener("mouseout", function (e){
+            figura = !figura;
+          });
+
+          canvas.addEventListener("mousemove", function (e){
+            
+            if(pressed){
+              ctx.fillStyle = "rgba(0,0,0,0.8)";
+
+              ctx.beginPath();
+              ctx.arc(e.offsetX,e.offsetY , 2, 0, 2 * Math.PI);
+              ctx.stroke();
+              ctx.fill();
+            }
+            
+          });
+
+          var figura = false;
+          var color;
+          var pressed;
+          ctx.strokeStyle = "rgb(100, 100, 100)";
+          
+          canvas.addEventListener("mouseover", function (e){
+            color = "rgba(" + Math.random()*255 + "," + Math.random()*255 + "," + Math.random()*255 + ", 0.8)";
+          });
+
+          canvas.addEventListener("click", function (e){
+
+            ctx.fillStyle = color;
+
+            if(figura){
+              ctx.beginPath();
+              ctx.arc(e.offsetX,e.offsetY , 25, 0, 2 * Math.PI);
+              ctx.stroke();
+              ctx.fill();
+            }else{
+              ctx.fillRect(e.offsetX-25,e.offsetY-25,50,50);
+            }
+          });
+
+          canvas.addEventListener("mouseout", function (e){
+            figura = !figura;
+          });
+
+          canvas.addEventListener("mousemove", function (e){
+            
+            if(pressed){
+              ctx.fillStyle = "rgba(0,0,0,0.8)";
+
+              ctx.beginPath();
+              ctx.arc(e.offsetX,e.offsetY , 2, 0, 2 * Math.PI);
+              ctx.stroke();
+              ctx.fill();
+            }
+            
+          });
+
+          canvas.addEventListener("mousedown", function (e){
+            pressed = true;
+          });
+          canvas.addEventListener("mouseup", function (e){
+            pressed = false;
+          });*/
+
+          var xMov = 0;
+          var yMov = 0;
+
+          document.addEventListener("keydown", function(e){
+            console.log(e.keyCode);
+
+            if(e.keyCode == 37 || e.keyCode == 65){
+              xMov -= 5;
+            }
+            if(e.keyCode == 38 || e.keyCode == 87){
+              yMov -= 5;
+            }
+            if(e.keyCode == 39 || e.keyCode == 68){
+              xMov += 5;
+            }
+            if(e.keyCode == 40 || e.keyCode == 83){
+              yMov += 5;
+            }
+            
+
+            ctx.fillStyle = "rgb(255,255,255)";
+            ctx.fillRect(0,0,800,720);
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.fillStyle = "rgb(138,209,138)";
+            ctx.fillRect(xMov,yMov,50,50);
+            ctx.fill();
+            ctx.stroke();
           });
 
         </script>
