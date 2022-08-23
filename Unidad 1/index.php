@@ -206,7 +206,7 @@
           });
           canvas.addEventListener("mouseup", function (e){
             pressed = false;
-          });*/
+          });
 
           var xMov = 0;
           var yMov = 0;
@@ -237,7 +237,68 @@
             ctx.fillRect(xMov,yMov,50,50);
             ctx.fill();
             ctx.stroke();
+          });*/
+
+          /*
+          var figura = false;
+          var tamano = 5;
+          var color;
+          var pressed;
+
+          document.addEventListener("keydown", function(e){
+            console.log(e.keyCode);
+            console.log(figura);
+
+            if(e.keyCode == 38){
+              tamano += 5;
+            }
+            if(e.keyCode == 40){
+              tamano -= 5;
+            }
+            if(e.keyCode == 17){
+              color = "rgb(" + Math.random()*255 + "," + Math.random()*255 + "," + Math.random()*255 + ")";
+            }
+            if(e.keyCode == 16){
+              figura = !figura;
+            }
+            
+            ctx.fillStyle = color;
+              ctx.strokeStyle = color;
+              if(figura){
+                ctx.beginPath();
+                ctx.arc(tamano,tamano, tamano, 0, 2 * Math.PI);
+                ctx.stroke();
+                ctx.fill();
+              }else{
+                ctx.fillRect(0,0,(tamano*2),(tamano*2));
+              }
+
           });
+
+
+
+          canvas.addEventListener("mousemove", function (e){
+            if(pressed){
+              ctx.fillStyle = color;
+              ctx.strokeStyle = color;
+              if(figura){
+                ctx.beginPath();
+                ctx.arc(e.offsetX,e.offsetY , tamano, 0, 2 * Math.PI);
+                ctx.stroke();
+                ctx.fill();
+              }else{
+                ctx.fillRect(e.offsetX-(tamano),e.offsetY-(tamano),(tamano*2),(tamano*2));
+              }
+            }
+            
+          });
+
+          canvas.addEventListener("mousedown", function (e){
+            pressed = true;
+          });
+          canvas.addEventListener("mouseup", function (e){
+            pressed = false;
+          });*/
 
         </script>
     </body>
