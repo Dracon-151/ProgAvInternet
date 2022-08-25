@@ -19,17 +19,31 @@
         var speed = 5;
         var pause = false;
 
+        var bot = new Image();
+        var wallx = new Image();
+        var wally = new Image();
+        var gear = new Image();
+
+        var sound = new Audio();
+        
         function run()
         {
             canvas = document.getElementById('cvs');
             ctx = canvas.getContext('2d');
+            
+            bot.src = 'img/PlayerSprite.png';
+            wallx.src = 'img/platformX.png';
+            wally.src = 'img/platformY.png';
+            gear.src = 'img/gear.png';
 
-            player1 = new Cuadro(200,200,50,50,"rgb(138,209,138");
-            player2 = new Cuadro(300,300,25,25,"rgb(209,138,138");
-            paredes = [new Cuadro(80,175,25,250,"rgb(105,100,100"), 
-                    new Cuadro(720,175,25,250,"rgb(1050100,100"), 
-                    new Cuadro(110,80,600,25,"rgb(100,100,100"), 
-                    new Cuadro(110,500,600,25,"rgb(100,100,100")];
+            sound.src = 'audio/gearSound.mp3';
+
+            player1 = new Cuadro(200,200,38,40,bot);
+            player2 = new Cuadro(300,300,28,28,gear);
+            paredes = [new Cuadro(80,250,25,101,wally), 
+                    new Cuadro(720,250,25,101,wally),  
+                    new Cuadro(350,80,101,25,wallx), 
+                    new Cuadro(350,500,101,25,wallx)];
             paint();
         }
 
@@ -107,11 +121,13 @@
             player1.paint(ctx);
 
             if(player1.se_tocan(player2)){
+                sound.pause();
+                sound.currentTime = 0;
+                sound.play();
                 player2.x = Math.random()* 500 + 100;
                 player2.y = Math.random()* 200 + 200;
-                player1.c = "rgb(" + Math.random()*255 + "," + Math.random()*255 + "," + Math.random()*255 + ")";
-                    puntos += 10;
-                    speed += 0.5;
+                puntos += 10;
+                speed += 0.5;
             }
             player2.paint(ctx);
 
@@ -153,21 +169,18 @@
             }
         }
 
-        function Cuadro(x, y, w, h, c){
+        function Cuadro(x, y, w, h, src){
             this.x = x;
             this.y = y;
             this.w = w;
             this.h = h;
-            this.c = c;
+            this.src = src;
 
             this.paint = function(ctx){
-                ctx.fillStyle = this.c;
-                ctx.fillRect(this.x, this.y, this.w, this.h);
-                ctx.strokeRect(this.x, this.y, this.w, this.h);
+                ctx.drawImage(this.src, this.x, this.y, this.w, this.h);
             }
 
             this.se_tocan = function (target) { 
-
                 if(this.x < target.x + target.w &&
                 this.x + this.w > target.x && 
                 this.y < target.y + target.h && 
