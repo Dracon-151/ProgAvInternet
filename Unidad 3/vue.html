@@ -8,33 +8,20 @@
 
     <!-- ejemplo -->
     <div id="contenedor">
-        <h1>
-            {{name}}
-        </h1>
-
-        <h1>
-            {{lastname}}
-        </h1>
+        
+        <span v-for="(person, index) in people">
+            <h1>
+            {{(index+1)}} - {{person.name}} : {{person.job}}
+            </h1>
+        </span>
 
         <input type="text" v-model="name" name="">
+        <input type="text" v-model="job" name="">
 
 
-        <button @click="hola">
-            Click me!
+        <button @click="agregar">
+            Save person
         </button>
-
-        <hr>
-
-        <input type="number" v-model="number1">
-        <input type="number" v-model="number2">
-        
-        <button @click="sumar">
-            Sumar
-        </button>
-        <h1>
-            {{total}}
-        </h1>
-
     </div>
 
     <script type="text/javascript">
@@ -44,19 +31,17 @@
         const app = createApp({
             data(){
                 return{
-                    name:'Alexis',
-                    lastname: 'Alvarado',
-                    number1: Number,
-                    number2: Number,
-                    total: 0
+                    name:'',
+                    job: '',
+                    people: [{name: 'Alexis', job:'Front'},
+                            {name: 'Daniel', job:'Back'}],
                 }
             },
             methods: {
-                hola(){
-                    alert('hola')
-                },
-                sumar(){
-                    this.total = this.number1+this.number2;
+                agregar(){
+                    this.people.push({name: this.name, job: this.job});
+                    this.name = '';
+                    this.job = '';
                 }
             }
         }).mount('#contenedor')
