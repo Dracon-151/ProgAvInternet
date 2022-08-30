@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <script src="https://unpkg.com/vue@3"></script>
+    <title>Vue</title>
+</head>
+<body>
+
+    <!-- ejemplo -->
+    <div id="contenedor">
+        <h1>
+            {{name}}
+        </h1>
+
+        <h1>
+            {{lastname}}
+        </h1>
+
+        <input type="text" v-model="name" name="">
+
+
+        <button @click="hola">
+            Click me!
+        </button>
+
+        <hr>
+
+        <input type="number" v-model="number1">
+        <input type="number" v-model="number2">
+        
+        <button @click="sumar">
+            Sumar
+        </button>
+        <h1>
+            {{total}}
+        </h1>
+
+    </div>
+
+    <script type="text/javascript">
+        //vincular vue con mi contenedor
+        const {createApp} = Vue;
+
+        const app = createApp({
+            data(){
+                return{
+                    name:'Alexis',
+                    lastname: 'Alvarado',
+                    number1: Number,
+                    number2: Number,
+                    total: 0
+                }
+            },
+            methods: {
+                hola(){
+                    alert('hola')
+                },
+                sumar(){
+                    this.total = this.number1+this.number2;
+                }
+            }
+        }).mount('#contenedor')
+    </script>
+</body>
+
+</html>
