@@ -8,41 +8,71 @@
 
     <!-- ejemplo -->
     <div id="contenedor">
-        
-        <span v-for="(person, index) in people">
-            <h1>
-            {{(index+1)}} - {{person.name}} : {{person.job}}
-            </h1>
-        </span>
 
-        <input type="text" v-model="name" name="">
-        <input type="text" v-model="job" name="">
+        <form>
+            <fieldset>
+                <legend>
+                    Login
+                </legend>
+                <label>
+                    Correo electronico
+                </label>
+                <input type="email" v-model="email">
+                <label>
+                    Contrasena
+                </label>                
+                <input type="password" v-model="password">
 
-
-        <button @click="agregar">
-            Save person
-        </button>
+                <button @click="login">
+                    Acceder
+                </button>
+            </fieldset>
+        </form>
     </div>
 
     <script type="text/javascript">
-        //vincular vue con mi contenedor
         const {createApp} = Vue;
+
 
         const app = createApp({
             data(){
                 return{
-                    name:'',
-                    job: '',
-                    people: [{name: 'Alexis', job:'Front'},
-                            {name: 'Daniel', job:'Back'}],
+                    users: null,
+                    email: '',
+                    password: '',
                 }
             },
-            methods: {
-                agregar(){
-                    this.people.push({name: this.name, job: this.job});
-                    this.name = '';
-                    this.job = '';
+            methods:{
+                login(e){
+                    e.preventDefault();
+                    if(this.email && this.password){
+                        
+                        let userLogin = null;
+
+                        this.users.map((user) => {
+                            if(user.email.toLowerCase() === this.email.toLowerCase()){
+                                if(user.password == this.password){
+                                    userLogin = user;
+                                }
+                            }
+                        });
+
+                        if(userLogin) {
+                            alert('Bienvenido ' + userLogin.username);
+                            document.location.href = 'table.html';
+                        }
+                        else alert('Los datos no coinciden con ningun registro');
+                    }
+                    else{
+                        alert('Ingrese un email y contrasena');
+                    }
                 }
+            },
+            mounted(){
+                fetch('users.json')
+                .then((res) => (res.json()))
+                .then((json) => (this.users = json))
+                .then((err) => (console.log(err)));
             }
         }).mount('#contenedor')
     </script>
