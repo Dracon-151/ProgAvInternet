@@ -46,8 +46,6 @@
                 },
             },
             mounted(){
-                console.log(window.localStorage.getItem('usuarioLogeado'));
-
                 fetch('users.json')
                 .then((res) => (res.json()))
                 .then((json) => (this.users = json))
