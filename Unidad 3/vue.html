@@ -60,7 +60,7 @@
                         if(userLogin) {
                             alert('Bienvenido ' + userLogin.username);
                             window.localStorage.clear();
-                            window.localStorage.setItem('usuarioLogeado', userLogin.email);
+                            window.localStorage.setItem('usuarioLogeado', JSON.stringify(userLogin));
                             document.location.href = 'table.html';
                         }
                         else alert('Los datos no coinciden con ningun registro');
