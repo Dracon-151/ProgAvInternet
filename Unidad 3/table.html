@@ -2,30 +2,78 @@
 <html lang="es">
 <head>
     <script src="https://unpkg.com/vue@3"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Vue</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
 </head>
 <body>
 
     <!-- ejemplo -->
     <div id="contenedor">
         <h2>Lista de usuarios</h2>
-        <table>
+        <button @click="addSetup" v-if="!form">Add</button>
+        <table v-if="!form && users.length > 0">
             <tr>
+                <th>#</th>
                 <th>Nombre</th>
                 <th>Username</th>
                 <th>Email</th>
+                <th>Phone</th>
                 <th>Website</th>
-                <th>Compania</th>
+                <th>Options</th>
             </tr>
-              <tr v-for="user in users">
+            <tr v-for="(user, index) in users">
+                <td>{{user.id}}</td>
                 <td>{{user.name}}</td>
                 <td>{{user.username}}</td>
                 <td>{{user.email}}</td>
+                <td>{{user.phone}}</td>
                 <td>{{user.website}}</td>
-                <td>{{user.company.name}}</td>
-              </tr>
+                <td>
+                    <button @click="editSetup(user, index)">Edit</button>
+                    <button @click="removeUser(index)">Remove</button>
+                </td>
+            </tr>
         </table>
-
+        <form v-if="form">
+            <fieldset>
+                <legend>
+                    {{title}}
+                </legend>
+                <label>
+                    Name
+                </label>                
+                <input type="text" v-model="name">
+                <label>
+                    Username
+                </label>                
+                <input type="text" v-model="username">
+                <label>
+                    Email
+                </label>
+                <input type="email" v-model="email">
+                <br>
+                <label>
+                    Phone
+                </label>                
+                <input type="text" v-model="phone">
+                <label>
+                    Website
+                </label>                
+                <input type="text" v-model="website">
+                
+                <button @click.prevent="form = false">
+                    Cancel
+                </button>
+                <button @click.prevent="action">
+                    Save
+                </button>
+            </fieldset>
+        </form>
         <p><small>Usuario loggeado: {{userLogged.username}} ({{userLogged.email}})</small></p>
     </div>
 
@@ -37,7 +85,124 @@
         const app = createApp({
             data(){
                 return{
-                    users: null,
+                    users: [],
+                    form: false,
+                    indx: -1,
+                    id: Number,
+                    title: String,
+                    name: String,
+                    username: String,
+                    email: String,
+                    phone: String,
+                    website: String,
+                }
+            },
+            methods:{
+                addSetup(){
+                    this.form = true;
+                    this.title = "Add user";
+                    this.name = "";
+                    this.username = "";
+                    this.email = "";
+                    this.phone = "";
+                    this.website = "";
+                    
+                    var identifier = 1;
+                    this.users.map((user) => {
+                        if(user.id == identifier) identifier++;
+                    })
+
+                    this.id = identifier;
+                },
+                editSetup(user, index){
+                    this.indx = index;
+                    this.id = user.id;
+                    this.form = true;
+                    this.title = "Edit user";
+                    this.name = user.name;
+                    this.username = user.username;
+                    this.email = user.email;
+                    this.phone = user.phone;
+                    this.website = user.website;
+                },
+                action(){
+                    if(this.indx == -1){
+                        this.add();
+                    }else{
+                        this.edit();
+                    }
+                },
+                add(){
+                    Swal.fire({
+                        title: "Estas seguro?",
+                        text: `Se agregara el usuario nuevo`,
+                        icon: "warning",
+                        buttons: true,
+                        showCancelButton: true,
+                        dangerMode: true,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire("Espera...", "Se esta ejecutando el proceso", "info");
+                        
+                            Swal.fire(
+                                    "Hecho",
+                                    "Usuario agregado correctamente",
+                                    "success"
+                                ).then(() => {
+
+                                    this.form = false;
+                                    this.users.push({id: this.id, name: this.name, username: this.username, email: this.email, 
+                                        phone: this.phone, website:this.website});                                
+                                });
+                        }
+                    })
+                },
+                edit(){
+                    Swal.fire({
+                        title: "Estas seguro?",
+                        text: `Se editara el usuario`,
+                        icon: "warning",
+                        buttons: true,
+                        showCancelButton: true,
+                        dangerMode: true,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire("Espera...", "Se esta ejecutando el proceso", "info");
+                        
+                            Swal.fire(
+                                    "Hecho",
+                                    "Usuario editado correctamente",
+                                    "success"
+                                ).then(() => {
+                                    this.form = false;
+                                    this.users[this.indx] = {id: this.id, name: this.name, username: this.username, email: this.email, 
+                                        phone: this.phone, website:this.website};   
+                                    this.indx = -1;
+                                });
+                        }
+                    })
+                },
+                removeUser(index){
+                    Swal.fire({
+                        title: "Estas seguro?",
+                        text: `El usuario se eliminara`,
+                        icon: "warning",
+                        buttons: true,
+                        showCancelButton: true,
+                        dangerMode: true,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire("Espera...", "Se esta ejecutando el proceso", "info");
+                        
+                            Swal.fire(
+                                    "Hecho",
+                                    "Usuario eliminado correctamente",
+                                    "success"
+                                ).then(() => {
+                                    this.users.splice(index, 1); 
+                                });
+                        }
+                    })
                 }
             },
             computed:{
