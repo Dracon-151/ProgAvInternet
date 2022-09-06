@@ -8,6 +8,7 @@
 
     <!-- ejemplo -->
     <div id="contenedor">
+        <h2>Lista de usuarios</h2>
         <table>
             <tr>
                 <th>Nombre</th>
@@ -24,19 +25,30 @@
                 <td>{{user.company.name}}</td>
               </tr>
         </table>
+
+        <p><small>Usuario loggeado: {{userLogged}}</small></p>
     </div>
 
     <script type="text/javascript">
+
         const {createApp} = Vue;
 
 
         const app = createApp({
             data(){
                 return{
-                    users: null
+                    users: null,
                 }
             },
+            computed:{
+                userLogged(){
+                    if(this.users) return window.localStorage.getItem('usuarioLogeado');
+                    else return window.localStorage.getItem('usuarioLogeado');
+                },
+            },
             mounted(){
+                console.log(window.localStorage.getItem('usuarioLogeado'));
+
                 fetch('users.json')
                 .then((res) => (res.json()))
                 .then((json) => (this.users = json))

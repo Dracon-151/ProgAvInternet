@@ -59,6 +59,8 @@
 
                         if(userLogin) {
                             alert('Bienvenido ' + userLogin.username);
+                            window.localStorage.clear();
+                            window.localStorage.setItem('usuarioLogeado', userLogin.email);
                             document.location.href = 'table.html';
                         }
                         else alert('Los datos no coinciden con ningun registro');
