@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <script src="https://unpkg.com/vue@3"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <title>Vue</title>
     <style>
         table, th, td {
@@ -14,67 +14,54 @@
 
     <!-- ejemplo -->
     <div id="contenedor">
-        <h2>Lista de usuarios</h2>
-        <button @click="addSetup" v-if="!form">Add</button>
-        <table v-if="!form && users.length > 0">
-            <tr>
-                <th>#</th>
-                <th>Nombre</th>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Website</th>
-                <th>Options</th>
-            </tr>
-            <tr v-for="(user, index) in users">
-                <td>{{user.id}}</td>
-                <td>{{user.name}}</td>
-                <td>{{user.username}}</td>
-                <td>{{user.email}}</td>
-                <td>{{user.phone}}</td>
-                <td>{{user.website}}</td>
-                <td>
-                    <button @click="editSetup(user, index)">Edit</button>
-                    <button @click="removeUser(index)">Remove</button>
-                </td>
-            </tr>
-        </table>
-        <form v-if="form">
+        <form v-if="form > 0">
             <fieldset>
                 <legend>
-                    {{title}}
+                    Rating
                 </legend>
-                <label>
-                    Name
-                </label>                
-                <input type="text" v-model="name">
-                <label>
-                    Username
-                </label>                
-                <input type="text" v-model="username">
-                <label>
-                    Email
-                </label>
-                <input type="email" v-model="email">
-                <br>
-                <label>
-                    Phone
-                </label>                
-                <input type="text" v-model="phone">
-                <label>
-                    Website
-                </label>                
-                <input type="text" v-model="website">
-                
-                <button @click.prevent="form = false">
-                    Cancel
-                </button>
-                <button @click.prevent="action">
-                    Save
+                <input min="0" max="10" type="number" v-model="rating">
+                <button @click.prevent="rate(form)">
+                    Calificar
                 </button>
             </fieldset>
         </form>
-        <p><small>Usuario loggeado: {{userLogged.username}} ({{userLogged.email}})</small></p>
+        <h2>Lista de peliculas</h2>
+        <table v-if="movies.length > 0">
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Fecha</th>
+                <th>Votos</th>
+                <th>Promedio</th>
+                <th>Idioma original</th>
+                <th>Sinopsis</th>
+                <th>Resenas</th>
+                <th>Calificar</th>
+            </tr>
+            <tr v-for="(movie, index) in movies">
+                <td>{{movie.id}}</td>
+                <td>{{movie.title}}</td>
+                <td>{{movie.release_date}}</td>
+                <td>{{movie.vote_count}}</td>
+                <td>{{movie.vote_average}}</td>
+                <td>{{movie.original_language}}</td>
+                <td>{{movie.overview.substring(0, 50) + '...'}}</td> 
+                <td>
+                    <button @click="viewReviews(movie.id)">
+                        Ver
+                    </button>
+                </td>
+                <td>
+                    <button @click="form = movie.id">
+                        Calificar
+                    </button>
+                    <button @click="deleteRating(movie.id)">
+                        Eliminar calificacion
+                    </button>
+                </td>               
+            </tr>
+        </table>
+        <p><small>Usuario logeado: {{userLogged.username}}</small></p>
     </div>
 
     <script type="text/javascript">
@@ -85,136 +72,103 @@
         const app = createApp({
             data(){
                 return{
-                    users: [],
-                    form: false,
-                    indx: -1,
-                    id: Number,
-                    title: String,
-                    name: String,
-                    username: String,
-                    email: String,
-                    phone: String,
-                    website: String,
-                }
-            },
-            methods:{
-                addSetup(){
-                    this.form = true;
-                    this.title = "Add user";
-                    this.name = "";
-                    this.username = "";
-                    this.email = "";
-                    this.phone = "";
-                    this.website = "";
-                    
-                    var identifier = 1;
-                    this.users.map((user) => {
-                        if(user.id == identifier) identifier++;
-                    })
-
-                    this.id = identifier;
-                },
-                editSetup(user, index){
-                    this.indx = index;
-                    this.id = user.id;
-                    this.form = true;
-                    this.title = "Edit user";
-                    this.name = user.name;
-                    this.username = user.username;
-                    this.email = user.email;
-                    this.phone = user.phone;
-                    this.website = user.website;
-                },
-                action(){
-                    if(this.indx == -1){
-                        this.add();
-                    }else{
-                        this.edit();
-                    }
-                },
-                add(){
-                    Swal.fire({
-                        title: "Estas seguro?",
-                        text: `Se agregara el usuario nuevo`,
-                        icon: "warning",
-                        buttons: true,
-                        showCancelButton: true,
-                        dangerMode: true,
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            Swal.fire("Espera...", "Se esta ejecutando el proceso", "info");
-                        
-                            Swal.fire(
-                                    "Hecho",
-                                    "Usuario agregado correctamente",
-                                    "success"
-                                ).then(() => {
-
-                                    this.form = false;
-                                    this.users.push({id: this.id, name: this.name, username: this.username, email: this.email, 
-                                        phone: this.phone, website:this.website});                                
-                                });
-                        }
-                    })
-                },
-                edit(){
-                    Swal.fire({
-                        title: "Estas seguro?",
-                        text: `Se editara el usuario`,
-                        icon: "warning",
-                        buttons: true,
-                        showCancelButton: true,
-                        dangerMode: true,
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            Swal.fire("Espera...", "Se esta ejecutando el proceso", "info");
-                        
-                            Swal.fire(
-                                    "Hecho",
-                                    "Usuario editado correctamente",
-                                    "success"
-                                ).then(() => {
-                                    this.form = false;
-                                    this.users[this.indx] = {id: this.id, name: this.name, username: this.username, email: this.email, 
-                                        phone: this.phone, website:this.website};   
-                                    this.indx = -1;
-                                });
-                        }
-                    })
-                },
-                removeUser(index){
-                    Swal.fire({
-                        title: "Estas seguro?",
-                        text: `El usuario se eliminara`,
-                        icon: "warning",
-                        buttons: true,
-                        showCancelButton: true,
-                        dangerMode: true,
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            Swal.fire("Espera...", "Se esta ejecutando el proceso", "info");
-                        
-                            Swal.fire(
-                                    "Hecho",
-                                    "Usuario eliminado correctamente",
-                                    "success"
-                                ).then(() => {
-                                    this.users.splice(index, 1); 
-                                });
-                        }
-                    })
+                    movies: [],
+                    reviews: [],
+                    rating: '',
+                    form: 0,
                 }
             },
             computed:{
                 userLogged(){
-                    return JSON.parse(window.localStorage.getItem('usuarioLogeado'));
+                    return JSON.parse(window.localStorage.getItem('user'));
                 },
             },
             mounted(){
-                fetch('users.json')
-                .then((res) => (res.json()))
-                .then((json) => (this.users = json))
-                .then((err) => (console.log(err)));
+                var config = {
+                    method: 'get',
+                    url: 'https://api.themoviedb.org/3/movie/popular?api_key=287c69abe90ab1d772645c8f8ec37f57&language=es-MX&page=1',
+                        headers: { }
+                };
+
+                let self = this
+
+                axios(config)
+                .then(function (response) {
+                    console.log(response.data.results);
+                    self.movies = response.data.results;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+            },
+            methods:{
+                rate(id){
+                    if(this.rating > 0){
+                        var data = new FormData();
+                        data.append('value', this.rating);
+
+                        var config = {
+                            method: 'post',
+                            url: 'https://api.themoviedb.org/3/movie/' + id + '/rating?api_key=287c69abe90ab1d772645c8f8ec37f57',
+                            headers: { 
+                                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyODdjNjlhYmU5MGFiMWQ3NzI2NDVjOGY4ZWMzN2Y1NyIsInN1YiI6IjYzMWE4YjVkYWFmZWJkMDA5MTk4MDM4MCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.q-RHz7YEygj_ozVhUaew37mWJ0obog2BtaHPNH08EWo'                        },
+                            data : data
+                        };
+
+                        axios(config)
+                        .then(function (response) {
+                            console.log(response.data);
+                            if(response.data.success){
+                                alert('Rating exitoso');
+                            }
+                        })
+                        .catch(function (error) {
+                        console.log(error);
+                        });
+
+                        this.form = 0;
+                        this.rating = '';
+                    }
+                },
+                deleteRating(id){
+                    var config = {
+                        method: 'delete',
+                        url: 'https://api.themoviedb.org/3/movie/' + id + '/rating?api_key=287c69abe90ab1d772645c8f8ec37f57',
+                        headers: { 
+                            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyODdjNjlhYmU5MGFiMWQ3NzI2NDVjOGY4ZWMzN2Y1NyIsInN1YiI6IjYzMWE4YjVkYWFmZWJkMDA5MTk4MDM4MCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.q-RHz7YEygj_ozVhUaew37mWJ0obog2BtaHPNH08EWo'
+                        }
+                    };
+
+                    axios(config)
+                    .then(function (response) {
+                        console.log(response.data);
+                        if(response.data.success){
+                            alert('Rating eliminado con exito');
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                },
+                viewReviews(id){
+                    var config = {
+                        method: 'get',
+                        url: 'https://api.themoviedb.org/3/movie/'+ id +'/reviews?api_key=287c69abe90ab1d772645c8f8ec37f57&language=en-US&page=1',
+                        headers: { }
+                    };
+
+                    let self = this
+
+                    axios(config)
+                    .then(function (response) {
+                        console.log(JSON.stringify(response.data.results));
+                        self.reviews = response.data.results;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                }
             }
         }).mount('#contenedor')
     </script>

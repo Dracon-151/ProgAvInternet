@@ -2,10 +2,10 @@
 <html lang="es">
 <head>
     <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <title>Vue</title>
 </head>
 <body>
-
     <!-- ejemplo -->
     <div id="contenedor">
 
@@ -17,7 +17,7 @@
                 <label>
                     Correo electronico
                 </label>
-                <input type="email" v-model="email">
+                <input type="email" v-model="username">
                 <label>
                     Contrasena
                 </label>                
@@ -37,44 +37,55 @@
         const app = createApp({
             data(){
                 return{
-                    users: [],
-                    email: '',
+                    username: '',
                     password: '',
                 }
             },
             methods:{
                 login(e){
                     e.preventDefault();
-                    if(this.email && this.password){
-                        
-                        let userLogin = null;
+                    
+                    var data = new FormData();
+                    data.append('username', this.username);
+                    data.append('password', this.password);
+                    //data.append('username', 'AlexisAlvarado');
+                    //data.append('password', 'deal_19');
+                    data.append('request_token', '');
 
-                        this.users.map((user) => {
-                            if(user.email.toLowerCase() === this.email.toLowerCase()){
-                                if(user.password == this.password){
-                                    userLogin = user;
-                                }
+                    var config = {
+                    method: 'post',
+                    url: 'https://api.themoviedb.org/3/authentication/token/validate_with_login?api_key=287c69abe90ab1d772645c8f8ec37f57',
+                    headers: { 
+                    },
+                    data : data
+                    };
+
+                    let self = this;
+
+                    axios(config)
+                    .then(function (response) {
+                        if(response.data.success){
+                            alert('Bienvenido');
+                            
+                            var save_user = {
+                               username: self.username
                             }
-                        });
 
-                        if(userLogin) {
-                            alert('Bienvenido ' + userLogin.username);
-                            window.localStorage.clear();
-                            window.localStorage.setItem('usuarioLogeado', JSON.stringify(userLogin));
-                            document.location.href = 'table.html';
+                            console.log(save_user);
+                            window.localStorage.setItem('user', JSON.stringify(save_user));
+
+                            console.log(JSON.parse(window.localStorage.getItem('user')));
+
+                            window.location.href = 'table.html';
                         }
-                        else alert('Los datos no coinciden con ningun registro');
-                    }
-                    else{
-                        alert('Ingrese un email y contrasena');
-                    }
+                    })
+                    .catch(function (error) {
+                        alert('Datos incorrectos');
+                    });
                 }
             },
             mounted(){
-                fetch('users.json')
-                .then((res) => (res.json()))
-                .then((json) => (this.users = json))
-                .then((err) => (console.log(err)));
+               
             }
         }).mount('#contenedor')
     </script>
