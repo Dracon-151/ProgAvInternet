@@ -2,23 +2,25 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="css/main.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <title>Index</title>
     </head>
     <body>
         <div class="container">
-            <fieldset>
+            <div class="card">
                 <legend>Login</legend>
                 <form>
                     <label for="email">Email</label>
-                    <input type="email" id="email">
+                    <input class="form-control" type="email" id="email">
 
                     <label for="password">Password</label>
-                    <input type="password" id="password">
+                    <input class="form-control" type="password" id="password">
 
-                    <button type="submit">
+                    <br>
+                    <button class="btn btn-success">
                         Log in
                     </button>
-                </form>
+            </div>
             </fieldset>
         </div>
     </body>
