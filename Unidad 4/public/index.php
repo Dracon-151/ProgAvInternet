@@ -1,44 +1,75 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="css/main.css">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>        <title>Index</title>
+        
+        <?php include "layouts/head.template.php" ?>
+    
     </head>
-    <body class="bg-secondary">
-        <div class="container">
-            <br>
-            <div class="row justify-content-md-center">
-                <div class="card py-4 px-5 col-md-6">
-                    <h2>Inicio de sesión</h2>
-                    <br>
-                    <p>Ingrese sus datos para iniciar sesión</p>
-                    <form>
-                        <label for="email">Email</label>
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">@</span>
+    <body>
+
+        <!-- Header -->
+        <?php include "layouts/headbar.template.php" ?>
+
+        <div class="container-fluid container-bg">
+            <div class="row">
+                
+                <!-- Sidebar -->
+                <?php include "layouts/sidebar.template.php" ?>
+
+                <div class="col-md-10 col-sm-6 d-none d-sm-block py-2">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <h2>Productos</h2>
                             </div>
-                            <input class="form-control" type="email" id="email" placeholder="email@gmail.com">
-                        </div>
-
-                        <label for="password">Contraseña</label>
-
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">*</span>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-info float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    +
+                                </button>
                             </div>
-                            <input class="form-control" type="password" id="password" placeholder="*****">
                         </div>
-
-                        <br>
-                        <a class="btn btn-success" href="main.php">
-                            Iniciar sesión
-                        </a>
+                        <div class="row">
+                            <?php
+                                for ($i = 0; $i < 12; $i++) {
+                                    ?>
+                                        <div class="col-sm-12 col-md-3 pt-3">
+                                            <div class="card bg-secondary text-light">
+                                                <img src="img/logo.png" class="card-img-top">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Album</h5>
+                                                    <h6 class="card-subtitle">Twice</h6>
+                                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                                    
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <a href="details.php" class="btn w-100 py-1 btn-info">Go somewhere</a>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <button type="button" class="btn w-100 px-0 py-1 btn-warning" 
+                                                            data-bs-toggle="modal" data-bs-target="#exampleModal">Editar</button>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <button type="button" onclick="eliminar()" class="btn w-100 px-0 py-1 btn-danger">Eliminar</button>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php
+                                }
+                            ?>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        <!-- Modal -->
+        <?php include "layouts/modalAddEdit.template.php" ?>
+
+        <!-- Scripts -->
+        <?php include "layouts/scripts.template.php" ?>
+            
+        </script>
     </body>
 </html>

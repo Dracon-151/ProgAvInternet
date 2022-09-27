@@ -1,12 +1,15 @@
-.container fieldset {
-  background-color: #1fbbbb;
+.logo {
+  width: 40px;
+  height: 40px;
 }
-.container fieldset form {
-  background-color: #3adfdf;
+.sidebar {
+  height: 100vh;
 }
-.container fieldset form button {
-  width: 60px;
-  height: 30px;
-  background-color: #44d444;
-  color: white;
+.detail-img {
+  width: 50px;
+  height: 50px;
+}
+
+.container-bg{
+  background-color: #888888;
 }
