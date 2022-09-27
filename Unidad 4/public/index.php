@@ -69,7 +69,5 @@
 
         <!-- Scripts -->
         <?php include "layouts/scripts.template.php" ?>
-            
-        </script>
     </body>
 </html>
