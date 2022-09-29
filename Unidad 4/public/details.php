@@ -32,9 +32,6 @@
                                 <h5>Twice</h5>
                                 <h6><p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p></h6>  
                                 <div class="row">
-                                    <div class="col-md-12">
-                                        <a href="#" class="btn w-100 py-1 btn-info">Go somewhere</a>
-                                    </div>
                                     <div class="col-md-6">
                                         <button type="button" class="btn w-100 px-0 py-1 btn-warning" 
                                         data-bs-toggle="modal" data-bs-target="#exampleModal">Editar</button>

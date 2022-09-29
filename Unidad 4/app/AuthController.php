@@ -41,7 +41,7 @@ Class AuthController{
 
         if(isset($response->code) && $response->code > 0){
             session_start();
-            $_SESSION['data'] = $response->data;
+            $_SESSION['userData'] = $response->data;
             header("Location:../public/index.php");
         }
         else{

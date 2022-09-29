@@ -6,28 +6,28 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <label for="password">Nombre Album</label>
+                <label for="password">Nombre del producto</label>
                 <div class="input-group mb-2">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">T</span>
+                        <span class="input-group-text" id="basic-addon1">P</span>
                     </div>
-                    <input class="form-control" type="text" id="albumName" placeholder="Album">
+                    <input class="form-control" type="text" id="productName" placeholder="Producto">
                 </div>
-                <label for="password">Nombre Artista</label>
+                <label for="password">Nombre de la marca</label>
                 <div class="input-group mb-2">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">A</span>
+                        <span class="input-group-text" id="basic-addon1">M</span>
                     </div>
-                    <input class="form-control" type="text" id="artistName" placeholder="Artista">
+                    <input class="form-control" type="text" id="brandName" placeholder="Marca">
                 </div>
                 <label for="password">Descripción</label>
                 <div class="input-group mb-2">
-                    <textarea class="form-control" id="descripcion" cols="30" rows="10"></textarea>
+                    <textarea class="form-control" id="description" cols="30" rows="10"></textarea>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button onclick="guardar()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button onclick="guardar()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
             </div>
         </div>
     </div>
