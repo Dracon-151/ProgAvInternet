@@ -6,7 +6,8 @@
         <?php include "../app/ProductController.php" ?>
 
         <?php
-            $productos = getProductos();
+            $productC = new ProductController();
+            $productos = $productC->getProductos();
         ?>
     
     </head>

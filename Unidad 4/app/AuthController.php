@@ -31,11 +31,11 @@ Class AuthController{
         ));
 
         #l8&h83&rNY82mc
+        #169|k3VroBD3NpCF74rw6xAEizTZH9g3ZhElldgG679e
 
         $response = curl_exec($curl);
 
         curl_close($curl);
-        echo $response;
 
         $response = json_decode($response);
 
