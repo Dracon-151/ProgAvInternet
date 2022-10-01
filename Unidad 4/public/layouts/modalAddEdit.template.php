@@ -9,23 +9,24 @@
                 <div class="modal-body">
                     <label for="name">Nombre del producto</label>
                     <div class="input-group mb-2">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">P</span>
-                        </div>
                         <input class="form-control" type="text" name="name" placeholder="Producto">
                     </div>
                     <label for="brand_id">Marca</label>
                     <div class="input-group mb-2">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">#</span>
-                        </div>
-                        <input class="form-control" type="number" name="brand_id" placeholder="Marca">
+                        <select class="form-control" name="brand_id">
+
+                            <option disabled default selected>Seleccione una marca</option>
+                            <?php 
+                                foreach($brands as $brand){
+                            ?>      
+                                    <option value=" <?php echo $brand->id ?>"> <?php echo $brand->name ?> </option> 
+                            <?php
+                                }
+                            ?>
+                        </select>
                     </div>
                     <label for="features">Features</label>
                     <div class="input-group mb-2">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">F</span>
-                        </div>
                         <input class="form-control" type="text" name="features" placeholder="Features">
                     </div>
                     <label for="description">Descripción</label>

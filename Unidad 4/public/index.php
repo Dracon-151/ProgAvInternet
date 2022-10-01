@@ -8,6 +8,7 @@
         <?php
             $productC = new ProductController();
             $productos = $productC->getProductos();
+            $brands = $productC->getBrands();
         ?>
     
     </head>

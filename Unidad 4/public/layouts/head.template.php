@@ -35,7 +35,7 @@
 }
 .card-product img{
   max-width: 350px;
-  max-height: 350px;
+  max-height: 300px;
   width: auto;
   height: auto;
 }
