@@ -11,13 +11,21 @@ if(isset($_POST['action'])){
             $features = strip_tags($_POST['features']);
             $description = strip_tags($_POST['description']);
             
-            $productC->create($name, $slug, $brand_id, $features, $description);
+            $target_path = "../public/img/products/";
+            $target_path = $target_path . basename( $_FILES['productImage']['name']); 
+            if(move_uploaded_file($_FILES['productImage']['tmp_name'], $target_path)) {
+                
+                $productC->create($name, $slug, $brand_id, $features, $description, $target_path);
+            } else{
+                echo "Ha ocurrido un error, trate de nuevo!";
+            }
+            
         break;
     }
 }
 
 Class ProductController{
-    public function create($name, $slug, $brand_id, $features, $description){
+    public function create($name, $slug, $brand_id, $features, $description, $image){
         var_dump($name);
         var_dump($slug);
         var_dump($brand_id);
@@ -36,7 +44,7 @@ Class ProductController{
         CURLOPT_FOLLOWLOCATION => true,
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'POST',
-        CURLOPT_POSTFIELDS => array('name' => $name,'slug' => $slug,'description' => $description,'features' => $features,'brand_id' => $brand_id,'cover'=> null),
+        CURLOPT_POSTFIELDS => array('name' => $name,'slug' => $slug,'description' => $description,'features' => $features,'brand_id' => $brand_id,'cover'=> new CURLFILE($image)),
         CURLOPT_HTTPHEADER => array(
             'Authorization: Bearer ' . $_SESSION['userData']->token
         ),
