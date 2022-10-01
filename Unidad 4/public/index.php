@@ -3,10 +3,7 @@
     <head>
         <?php include "layouts/head.template.php" ?>
         
-        <?php include "../app/ProductController.php" ?>
-
         <?php
-            $productC = new ProductController();
             $productos = $productC->getProductos();
             $brands = $productC->getBrands();
         ?>
@@ -52,7 +49,7 @@
                                                 <div class="card-footer">
                                                     <div class="row">
                                                         <div class="col-md-12">
-                                                            <a href="details.php?id=<?php echo $producto->id ?>" class="btn w-100 py-1 btn-info">Detalles</a>
+                                                            <a href="details.php?slug=<?php echo $producto->slug ?>" class="btn w-100 py-1 btn-info">Detalles</a>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <button type="button" class="btn w-100 px-0 py-1 btn-warning" 

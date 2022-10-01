@@ -1,8 +1,12 @@
+<?php include "../app/ProductController.php" ?>
+
 <?php 
     session_start();
     if(!isset($_SESSION['userData'])){
       if($_SERVER['REQUEST_URI'] != '/ProgAvInternet/Unidad%204/public/login.php') header('Location:../public/login.php');
     }
+    
+    $productC = new ProductController();
 ?>
 
 <link rel="stylesheet" type="text/css" href="css/main.css">
@@ -23,8 +27,10 @@
   height: parent;
 }
 .detail-img {
-  width: 360px;
-  height: 360px;
+  max-width: 360px;
+  max-height: 360px;
+  width: auto;
+  height: auto;
 }
 .container-bg{
   background-color: #f3f3f3;
