@@ -4,6 +4,7 @@
         <?php include "layouts/head.template.php" ?>
         
         <?php
+        if(isset($_SESSION['action'])) echo $_SESSION['action'];
             $productos = $productC->getProductos();
             $brands = $productC->getBrands();
         ?>
@@ -56,7 +57,7 @@
                                                             data-bs-toggle="modal" data-bs-target="#exampleModal">Editar</button>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <button type="button" onclick="eliminar()" class="btn w-100 px-0 py-1 btn-danger">Eliminar</button>
+                                                            <button type="button" onclick="eliminar( <?php echo $producto->id ?>)" class="btn w-100 px-0 py-1 btn-danger">Eliminar</button>
                                                         </div>
                                                         
                                                     </div>

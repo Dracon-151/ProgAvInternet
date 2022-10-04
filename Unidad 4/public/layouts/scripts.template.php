@@ -1,5 +1,5 @@
 <script>
-    const eliminar = () =>{
+    const eliminar = (id) =>{
         Swal.fire({
             title: 'Estas seguro?',
             text: "Esta accion no se puede deshacer",
@@ -11,21 +11,29 @@
             cancelButtonText: 'Cancelar'
             }).then((result) => {
             if (result.isConfirmed) {
-                Swal.fire(
-                'Eliminado',
-                'Se ha eliminado el registro',
-                'success'
-                )
-            }
-        })
-    }
 
-    const guardar = () =>{
-        Swal.fire({
-            icon: 'success',
-            title: 'Se ha guardado el registro',
-            showConfirmButton: false,
-            timer: 1500
+                var bodyFormData = new FormData();
+                bodyFormData.append('id', id);
+                bodyFormData.append('action', 'delete');
+
+                axios.post('../app/ProductController.php', bodyFormData)
+                .then((response) => {
+                    Swal.fire(
+                        "Hecho",
+                        "Registro eliminado correctamente",
+                        "success"
+                    ).then(() => {
+                        window.location.reload();
+                    });
+                })
+                .catch(function (error) {
+                    Swal.fire(
+                    'Error',
+                    'Algo ha salido mal',
+                    'error'
+                    );
+                });
+            }
         })
     }
 </script>
