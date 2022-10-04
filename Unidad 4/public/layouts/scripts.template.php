@@ -23,7 +23,7 @@
                         "Registro eliminado correctamente",
                         "success"
                     ).then(() => {
-                        window.location.reload();
+                        window.location.href = '../public/index.php?success=true';
                     });
                 })
                 .catch(function (error) {
@@ -35,5 +35,29 @@
                 });
             }
         })
+    }
+
+    const editProduct = (target) =>{
+
+        var values = target.getAttribute('data-product');
+        producto = JSON.parse(values);
+
+        document.getElementById('action').value = 'update';
+        document.getElementById('name').value = producto.name;
+        document.getElementById('description').value = producto.description;
+        document.getElementById('features').value = producto.features;
+        document.getElementById('brand_id').value = producto.brand_id ?? 0;
+        document.getElementById('productImage').value = '';
+        document.getElementById('id').value = producto.id;
+    }
+
+    const addProduct = () =>{
+        document.getElementById('action').value = 'create';
+        document.getElementById('name').value = '';
+        document.getElementById('description').value = '';
+        document.getElementById('features').value = '';
+        document.getElementById('brand_id').value = 0;
+        document.getElementById('productImage').value = '';
+        document.getElementById('id').value = '';
     }
 </script>

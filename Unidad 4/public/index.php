@@ -29,7 +29,9 @@
                                 <h2>Productos</h2>
                             </div>
                             <div class="col-md-2">
-                                <button type="button" class="btn btn-info float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <button type="button" class="btn btn-info float-end" 
+                                data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                onclick="addProduct()">
                                     +
                                 </button>
                             </div>
@@ -54,7 +56,8 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <button type="button" class="btn w-100 px-0 py-1 btn-warning" 
-                                                            data-bs-toggle="modal" data-bs-target="#exampleModal">Editar</button>
+                                                            data-bs-toggle="modal" data-bs-target="#exampleModal" data-product='<?php echo json_encode($producto) ?>'
+                                                            onclick="editProduct(this)">Editar</button>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <button type="button" onclick="eliminar( <?php echo $producto->id ?>)" class="btn w-100 px-0 py-1 btn-danger">Eliminar</button>

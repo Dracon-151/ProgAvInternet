@@ -21,6 +21,19 @@ if(isset($_POST['action'])){
             }
             
         break;
+        case 'update':
+            $productC = new ProductController();
+
+            $name = strip_tags($_POST['name']);
+            $slug = preg_replace('/\s+/', '-', strtolower(strip_tags($_POST['name'])));
+            $brand_id = strip_tags($_POST['brand_id']);
+            $features = strip_tags($_POST['features']);
+            $id = strip_tags($_POST['id']);
+            $description = strip_tags($_POST['description']);
+            
+            $productC->update($name, $slug, $brand_id, $features, $description, $id);
+            
+        break;
         case 'delete':
             $productC = new ProductController();
             
@@ -58,6 +71,42 @@ Class ProductController{
         curl_close($curl);
 
         $response = json_decode($response);
+
+        if(isset($response->code) && $response->code > 0){
+            header("Location:../public/index.php?success=true");
+        }
+        else{
+            echo 'Error';
+            header("Location:../public/index.php?error=true");
+        }
+    }
+
+    public function update($name, $slug, $brand_id, $features, $description, $id){
+    
+        session_start();
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => 'http://crud.jonathansoto.mx/api/products',
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => '',
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 0,
+          CURLOPT_FOLLOWLOCATION => true,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => 'PUT',
+          CURLOPT_POSTFIELDS => 'name='. $name .'&slug=' . $slug . '&description='. $description .'&features='. $features .'&brand_id='. $brand_id .'&id='. $id,
+          CURLOPT_HTTPHEADER => array(
+            'Authorization: Bearer ' . $_SESSION['userData']->token,
+            'Content-Type: application/x-www-form-urlencoded',
+            ),
+        ));
+        
+        $response = curl_exec($curl);
+        
+        curl_close($curl);
+
+       $response = json_decode($response);
 
         if(isset($response->code) && $response->code > 0){
             header("Location:../public/index.php?success=true");

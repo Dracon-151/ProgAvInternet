@@ -66,10 +66,11 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <button type="button" class="btn w-100 px-0 py-1 btn-warning" 
-                                        data-bs-toggle="modal" data-bs-target="#exampleModal">Editar</button>
+                                        data-bs-toggle="modal" data-bs-target="#exampleModal" data-product='<?php echo json_encode($producto) ?>'
+                                        onclick="editProduct(this)">Editar</button>
                                     </div>
                                     <div class="col-md-6">
-                                        <button type="button" onclick="eliminar()" class="btn w-100 px-0 py-1 btn-danger">Eliminar</button>
+                                        <button type="button" onclick="eliminar( <?php echo $producto->id ?>)" class="btn w-100 px-0 py-1 btn-danger">Eliminar</button>
                                     </div>
                                 </div>
                             </div>

@@ -9,17 +9,17 @@
                 <div class="modal-body">
                     <label for="name">Nombre del producto</label>
                     <div class="input-group mb-2">
-                        <input class="form-control" type="text" name="name" placeholder="Producto">
+                        <input class="form-control" type="text" id="name" name="name" placeholder="Producto">
                     </div>
                     <label for="brand_id">Marca</label>
                     <div class="input-group mb-2">
-                        <select class="form-control" name="brand_id">
+                        <select class="form-control" id="brand_id" name="brand_id">
 
-                            <option disabled default selected>Seleccione una marca</option>
+                            <option value="0" default disabled selected>Seleccione una marca</option>
                             <?php 
                                 foreach($brands as $brand){
                             ?>      
-                                    <option value=" <?php echo $brand->id ?>"> <?php echo $brand->name ?> </option> 
+                                    <option value="<?= $brand->id ?>"> <?= $brand->name ?> </option> 
                             <?php
                                 }
                             ?>
@@ -27,20 +27,22 @@
                     </div>
                     <label for="features">Features</label>
                     <div class="input-group mb-2">
-                        <input class="form-control" type="text" name="features" placeholder="Features">
+                        <input class="form-control" type="text" id="features" name="features" placeholder="Features">
                     </div>
                     <label for="description">Descripción</label>
                     <div class="input-group mb-2">
-                        <textarea class="form-control" name="description" cols="30" rows="10"></textarea>
+                        <textarea class="form-control" id="description" name="description" cols="30" rows="10"></textarea>
                     </div>
                     <label for="productImage">Imagen</label>
                     <div class="input-group mb-2">
-                        <input type="file" name="productImage" class="form-control" accept="image/*"/>
+                        <input type="file" id="productImage" name="productImage" class="form-control" accept="image/*"/>
                     </div>
                 </div>
+                <input type="hidden" id="action" name="action">
+                <input type="hidden" id="id" name="id">
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="submit" name="action" value="create" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
                 </div>
             </form>
         </div>
