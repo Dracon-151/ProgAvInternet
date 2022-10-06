@@ -2,6 +2,8 @@
 
 include_once "config.php";
 
+echo('a');
+
 if(isset($_POST['action'])){
     if(isset($_POST['token']) && $_POST['token'] == $_SESSION['token']){
         switch($_POST['action']){
@@ -45,10 +47,10 @@ Class AuthController{
 
         if(isset($response->code) && $response->code > 0){
             $_SESSION['userData'] = $response->data;
-            header("Location:../public/index.php");
+            header("Location: public/index.php");
         }
         else{
-            header("Location:../public/login.php?error=true");
+            header("Location: public/login.php?error=true");
         }
     }
 }
