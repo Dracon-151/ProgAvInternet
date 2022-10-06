@@ -11,7 +11,7 @@
                     <h2>Inicio de sesión</h2>
                     <br>
                     <p>Ingrese sus datos para iniciar sesión</p>
-                    <form action="../auth" method="POST">
+                    <form action="<?= BASE_PATH ?>auth" method="POST">
                         <label for="email">Email</label>
                         <div class="input-group mb-2">
                             <div class="input-group-prepend">

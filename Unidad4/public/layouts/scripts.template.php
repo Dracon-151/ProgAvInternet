@@ -17,14 +17,14 @@
                 bodyFormData.append('action', 'delete');
                 bodyFormData.append('token', '<?= $_SESSION['token'] ?>');
 
-                axios.post('../app/ProductController.php', bodyFormData)
+                axios.post('<?=BASE_PATH?>/app/ProductController.php', bodyFormData)
                 .then((response) => {
                     Swal.fire(
                         "Hecho",
                         "Registro eliminado correctamente",
                         "success"
                     ).then(() => {
-                        window.location.href = '../public/index.php?success=true';
+                        window.location.href = '<?=BASE_PATH?>public/index.php?success=true';
                     });
                 })
                 .catch(function (error) {

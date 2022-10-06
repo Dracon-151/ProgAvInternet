@@ -1,5 +1,4 @@
 <?php 
-
 include_once "config.php";
 
 if(isset($_POST['action'])){
@@ -14,7 +13,7 @@ if(isset($_POST['action'])){
                 $features = strip_tags($_POST['features']);
                 $description = strip_tags($_POST['description']);
                 
-                $target_path = "../public/img/products/";
+                $target_path = BASE_PATH . "public/img/products/";
                 $target_path = $target_path . basename( $_FILES['productImage']['name']); 
                 if(move_uploaded_file($_FILES['productImage']['tmp_name'], $target_path)) {
                     
@@ -76,11 +75,11 @@ Class ProductController{
         $response = json_decode($response);
 
         if(isset($response->code) && $response->code > 0){
-            header("Location:../public/index.php?success=true");
+            header('Location: ' . BASE_PATH . 'public/index.php?success=true');
         }
         else{
             echo 'Error';
-            header("Location:../public/index.php?error=true");
+            header('Location: ' . BASE_PATH . 'public/index.php?error=true');
         }
     }
 
@@ -111,11 +110,11 @@ Class ProductController{
        $response = json_decode($response);
 
         if(isset($response->code) && $response->code > 0){
-            header("Location:../public/index.php?success=true");
+            header('Location: ' . BASE_PATH . 'public/index.php?success=true');
         }
         else{
             echo 'Error';
-            header("Location:../public/index.php?error=true");
+            header('Location: ' . BASE_PATH . 'public/index.php?error=true');
         }
     }
 

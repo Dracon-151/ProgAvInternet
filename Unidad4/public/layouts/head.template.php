@@ -3,7 +3,7 @@
 
 <?php 
     if(!isset($_SESSION['userData'])){
-      if($_SERVER['REQUEST_URI'] != '/ProgAvInternet/Unidad%204/public/login.php') header('Location:../public/login.php');
+      if($_SERVER['REQUEST_URI'] != BASE_PATH . 'public/login.php') header('Location:' . BASE_PATH . 'public/login.php');
     }
     
     $productC = new ProductController();
