@@ -3,7 +3,8 @@
 
 <?php 
     if(!isset($_SESSION['userData'])){
-      if($_SERVER['REQUEST_URI'] != BASE_PATH . 'public/login.php') header('Location:' . BASE_PATH . 'public/login.php');
+      if("http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'] != BASE_PATH . 'public/login.php') 
+      header('Location:' . BASE_PATH . 'public/login.php');
     }
     
     $productC = new ProductController();
