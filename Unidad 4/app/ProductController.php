@@ -1,54 +1,57 @@
 <?php 
 
+include_once "config.php";
+
 if(isset($_POST['action'])){
-    switch($_POST['action']){
-        case 'create':
-            $productC = new ProductController();
+    if(isset($_POST['token']) && $_POST['token'] == $_SESSION['token']){
+        switch($_POST['action']){
+            case 'create':
+                $productC = new ProductController();
 
-            $name = strip_tags($_POST['name']);
-            $slug = preg_replace('/\s+/', '-', strtolower(strip_tags($_POST['name'])));
-            $brand_id = strip_tags($_POST['brand_id']);
-            $features = strip_tags($_POST['features']);
-            $description = strip_tags($_POST['description']);
-            
-            $target_path = "../public/img/products/";
-            $target_path = $target_path . basename( $_FILES['productImage']['name']); 
-            if(move_uploaded_file($_FILES['productImage']['tmp_name'], $target_path)) {
+                $name = strip_tags($_POST['name']);
+                $slug = preg_replace('/\s+/', '-', strtolower(strip_tags($_POST['name'])));
+                $brand_id = strip_tags($_POST['brand_id']);
+                $features = strip_tags($_POST['features']);
+                $description = strip_tags($_POST['description']);
                 
-                $productC->create($name, $slug, $brand_id, $features, $description, $target_path);
-            } else{
-                echo "Ha ocurrido un error, trate de nuevo!";
-            }
-            
-        break;
-        case 'update':
-            $productC = new ProductController();
+                $target_path = "../public/img/products/";
+                $target_path = $target_path . basename( $_FILES['productImage']['name']); 
+                if(move_uploaded_file($_FILES['productImage']['tmp_name'], $target_path)) {
+                    
+                    $productC->create($name, $slug, $brand_id, $features, $description, $target_path);
+                } else{
+                    echo "Ha ocurrido un error, trate de nuevo!";
+                }
+                
+            break;
+            case 'update':
+                $productC = new ProductController();
 
-            $name = strip_tags($_POST['name']);
-            $slug = preg_replace('/\s+/', '-', strtolower(strip_tags($_POST['name'])));
-            $brand_id = strip_tags($_POST['brand_id']);
-            $features = strip_tags($_POST['features']);
-            $id = strip_tags($_POST['id']);
-            $description = strip_tags($_POST['description']);
+                $name = strip_tags($_POST['name']);
+                $slug = preg_replace('/\s+/', '-', strtolower(strip_tags($_POST['name'])));
+                $brand_id = strip_tags($_POST['brand_id']);
+                $features = strip_tags($_POST['features']);
+                $id = strip_tags($_POST['id']);
+                $description = strip_tags($_POST['description']);
+                
+                $productC->update($name, $slug, $brand_id, $features, $description, $id);
+                
+            break;
+            case 'delete':
+                $productC = new ProductController();
+                
+                $id = strip_tags($_POST['id']);
             
-            $productC->update($name, $slug, $brand_id, $features, $description, $id);
-            
-        break;
-        case 'delete':
-            $productC = new ProductController();
-            
-            $id = strip_tags($_POST['id']);
-        
-            $productC->delete($id);
-            
-        break;
+                $productC->delete($id);
+                
+            break;
+        }
     }
 }
 
 Class ProductController{
     public function create($name, $slug, $brand_id, $features, $description, $image){
     
-        session_start();
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
@@ -83,7 +86,6 @@ Class ProductController{
 
     public function update($name, $slug, $brand_id, $features, $description, $id){
     
-        session_start();
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
@@ -119,7 +121,6 @@ Class ProductController{
 
     public function delete($id){
         
-        session_start();
 
         $curl = curl_init();
 

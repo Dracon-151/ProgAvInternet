@@ -15,6 +15,7 @@
                 var bodyFormData = new FormData();
                 bodyFormData.append('id', id);
                 bodyFormData.append('action', 'delete');
+                bodyFormData.append('token', '<?= $_SESSION['token'] ?>');
 
                 axios.post('../app/ProductController.php', bodyFormData)
                 .then((response) => {

@@ -28,6 +28,7 @@
                             </div>
                             <input class="form-control" type="password" name="password" placeholder="*****">
                         </div>
+                        <input type="hidden" id="token" name="token" value="<?php echo $_SESSION['token'] ?>">
 
                         <br>
                         <button type="submit" class="btn btn-success" name="action" value="access">

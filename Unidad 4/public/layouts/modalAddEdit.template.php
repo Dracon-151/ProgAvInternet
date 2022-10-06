@@ -40,6 +40,7 @@
                 </div>
                 <input type="hidden" id="action" name="action">
                 <input type="hidden" id="id" name="id">
+                <input type="hidden" id="token" name="token" value="<?php echo $_SESSION['token'] ?>">
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                     <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>

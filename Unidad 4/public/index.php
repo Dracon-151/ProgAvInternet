@@ -60,7 +60,7 @@
                                                             onclick="editProduct(this)">Editar</button>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <button type="button" onclick="eliminar( <?php echo $producto->id ?>)" class="btn w-100 px-0 py-1 btn-danger">Eliminar</button>
+                                                            <button type="button" onclick="eliminar(<?php echo $producto->id ?>)" class="btn w-100 px-0 py-1 btn-danger">Eliminar</button>
                                                         </div>
                                                         
                                                     </div>

@@ -1,15 +1,19 @@
 <?php 
 
-if(isset($_POST['action'])){
-    switch($_POST['action']){
-        case 'access':
-            $authC = new AuthController();
+include_once "config.php";
 
-            $email = strip_tags($_POST['email']);
-            $password = strip_tags($_POST['password']);
-            
-            $authC->login($email, $password);
-        break;
+if(isset($_POST['action'])){
+    if(isset($_POST['token']) && $_POST['token'] == $_SESSION['token']){
+        switch($_POST['action']){
+            case 'access':
+                $authC = new AuthController();
+    
+                $email = strip_tags($_POST['email']);
+                $password = strip_tags($_POST['password']);
+                
+                $authC->login($email, $password);
+            break;
+        }
     }
 }
 
@@ -40,7 +44,6 @@ Class AuthController{
         $response = json_decode($response);
 
         if(isset($response->code) && $response->code > 0){
-            session_start();
             $_SESSION['userData'] = $response->data;
             header("Location:../public/index.php");
         }

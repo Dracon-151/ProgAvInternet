@@ -1,7 +1,7 @@
+<?php include "../app/config.php" ?>
 <?php include "../app/ProductController.php" ?>
 
 <?php 
-    session_start();
     if(!isset($_SESSION['userData'])){
       if($_SERVER['REQUEST_URI'] != '/ProgAvInternet/Unidad%204/public/login.php') header('Location:../public/login.php');
     }
