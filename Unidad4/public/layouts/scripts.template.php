@@ -17,7 +17,7 @@
                 bodyFormData.append('action', 'delete');
                 bodyFormData.append('token', '<?= $_SESSION['token'] ?>');
 
-                axios.post('<?=BASE_PATH?>/app/ProductController.php', bodyFormData)
+                axios.post('<?= BASE_PATH ?>productCont', bodyFormData)
                 .then((response) => {
                     Swal.fire(
                         "Hecho",

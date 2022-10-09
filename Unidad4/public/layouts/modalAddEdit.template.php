@@ -5,7 +5,7 @@
                 <h5 class="modal-title" id="exampleModalLabel">Agregar</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form enctype="multipart/form-data" action="../app/ProductController.php" method="POST">
+            <form enctype="multipart/form-data" action="<?= BASE_PATH ?>productCont" method="POST">
                 <div class="modal-body">
                     <label for="name">Nombre del producto</label>
                     <div class="input-group mb-2">
