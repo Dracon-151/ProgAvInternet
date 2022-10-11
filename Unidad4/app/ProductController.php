@@ -75,11 +75,11 @@ Class ProductController{
         $response = json_decode($response);
 
         if(isset($response->code) && $response->code > 0){
-            header('Location: ' . BASE_PATH . 'public/index.php?success=true');
+            header('Location: ' . BASE_PATH . 'index?success=true');
         }
         else{
             echo 'Error';
-            header('Location: ' . BASE_PATH . 'public/index.php?error=true');
+            header('Location: ' . BASE_PATH . 'index?error=true');
         }
     }
 
@@ -110,11 +110,11 @@ Class ProductController{
        $response = json_decode($response);
 
         if(isset($response->code) && $response->code > 0){
-            header('Location: ' . BASE_PATH . 'public/index.php?success=true');
+            header('Location: ' . BASE_PATH . 'index?success=true');
         }
         else{
             echo 'Error';
-            header('Location: ' . BASE_PATH . 'public/index.php?error=true');
+            header('Location: ' . BASE_PATH . 'index?error=true');
         }
     }
 

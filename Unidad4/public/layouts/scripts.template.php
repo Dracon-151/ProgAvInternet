@@ -24,7 +24,7 @@
                         "Registro eliminado correctamente",
                         "success"
                     ).then(() => {
-                        window.location.href = '<?=BASE_PATH?>public/index.php?success=true';
+                        window.location.href = '<?=BASE_PATH?>index?success=true';
                     });
                 })
                 .catch(function (error) {

@@ -45,10 +45,10 @@ Class AuthController{
 
         if(isset($response->code) && $response->code > 0){
             $_SESSION['userData'] = $response->data;
-            header('Location: ' . BASE_PATH . 'public/index.php');
+            header('Location: ' . BASE_PATH . 'index');
         }
         else{
-            header('Location: ' . BASE_PATH . 'public/login.php?error=true');
+            header('Location: ' . BASE_PATH . 'login?error=true');
         }
     }
 }

@@ -52,7 +52,7 @@
                                                 <div class="card-footer">
                                                     <div class="row">
                                                         <div class="col-md-12">
-                                                            <a href="<?= BASE_PATH ?>public/details.php?slug=<?php echo $producto->slug ?>" class="btn w-100 py-1 btn-info">Detalles</a>
+                                                            <a href="<?= BASE_PATH ?>product/<?php echo $producto->slug ?>" class="btn w-100 py-1 btn-info">Detalles</a>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <button type="button" class="btn w-100 px-0 py-1 btn-warning" 

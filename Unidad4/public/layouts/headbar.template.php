@@ -1,13 +1,13 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <img src="img/logo.png" class="logo">
+        <img src="<?= BASE_PATH ?>public/img/logo.png" class="logo">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="<?=BASE_PATH?>public/index.php">Index</a>
+            <a class="nav-link active" aria-current="page" href="<?=BASE_PATH?>index">Index</a>
             </li>
             <li class="nav-item">
             <a class="nav-link" href="#">Link</a>
