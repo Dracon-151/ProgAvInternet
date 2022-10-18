@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -30,4 +31,8 @@ Route::get('suma/{num1}/{num2}/{num3?}', function ($num1, $num2, $num3=0) {
     echo $num1 + $num2 + $num3;
 })->where(['num1' => '[0-9]+', 'num2' => '[0-9]+', 'num3' => '[0-9]+']);
 
+Route::get('users', [UserController::class, 'index'])->name('users.index');
+Route::post('users', [UserController::class, 'store'])->name('users.store');
+Route::get('users/create', [UserController::class, 'create'])->name('users.create');
+Route::get('users/{id}', [UserController::class, 'show'])->where(['id' => '[0-9]+'])->name('users.show');
 
