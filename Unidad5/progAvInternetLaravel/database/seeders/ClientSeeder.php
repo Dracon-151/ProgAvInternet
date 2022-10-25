@@ -2,12 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\Client;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
-class UserSeeder extends Seeder
+class ClientSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,10 +15,16 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
+        Client::create([
             'name' => "Alexis Alvarado",
+            'phone_number' => "6122193138",
             'email' => "deal_19@alu.uabcs.mx",
-            'password' => bcrypt('deal_19'),
-        ]);
+        ]); 
+        
+        Client::create([
+            'name' => "Daniel Sepulveda",
+            'phone_number' => "6122193138",
+            'email' => "cese_19@alu.uabcs.mx",
+        ]); 
     }
 }

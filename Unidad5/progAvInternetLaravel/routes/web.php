@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -36,3 +37,5 @@ Route::post('users', [UserController::class, 'store'])->name('users.store');
 Route::get('users/create', [UserController::class, 'create'])->name('users.create');
 Route::get('users/{id}', [UserController::class, 'show'])->where(['id' => '[0-9]+'])->name('users.show');
 
+Route::get('clients', [ClientController::class, 'index'])->name('clients.index');
+Route::get('clients/{id}', [ClientController::class, 'show'])->where(['id' => '[0-9]+'])->name('clients.show');
