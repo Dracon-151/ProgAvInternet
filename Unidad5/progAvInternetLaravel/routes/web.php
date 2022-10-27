@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -39,3 +40,6 @@ Route::get('users/{id}', [UserController::class, 'show'])->where(['id' => '[0-9]
 
 Route::get('clients', [ClientController::class, 'index'])->name('clients.index');
 Route::get('clients/{id}', [ClientController::class, 'show'])->where(['id' => '[0-9]+'])->name('clients.show');
+
+Route::get('reservations', [ReservationController::class, 'index'])->name('reservations.index');
+Route::get('reservations/{id}', [ReservationController::class, 'show'])->where(['id' => '[0-9]+'])->name('reservations.show');
