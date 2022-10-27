@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Room;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
@@ -23,7 +24,7 @@ class RoomController extends Controller
      */
     public function create()
     {
-        //
+        return Room::with('reservations')->get();
     }
 
     /**
@@ -45,7 +46,7 @@ class RoomController extends Controller
      */
     public function show($id)
     {
-        //
+        return Room::with('reservations')->find($id);
     }
 
     /**

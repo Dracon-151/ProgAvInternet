@@ -22,6 +22,8 @@ return new class extends Migration
             $table->float('total');
             $table->string('status');
             $table->boolean('is_paid');
+            $table->foreign('client_id')->references('id')->on('clients');
+            $table->foreign('room_id')->references('id')->on('rooms');
             $table->timestamps();
             $table->softDeletes();
         });
