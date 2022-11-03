@@ -9,6 +9,12 @@ class Client extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'email',
+        'phone_number',
+    ];
+
     public function reservations(){
         return $this->hasMany(Reservation::class);
     }

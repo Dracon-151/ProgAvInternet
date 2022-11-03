@@ -40,6 +40,9 @@ Route::get('users/create', [UserController::class, 'create'])->name('users.creat
 Route::get('users/{id}', [UserController::class, 'show'])->where(['id' => '[0-9]+'])->name('users.show');
 
 Route::get('clients', [ClientController::class, 'index'])->name('clients.index');
+Route::post('clients', [ClientController::class, 'store'])->name('clients.store');
+
+Route::get('clients/create', [ClientController::class, 'create'])->name('clients.create');
 Route::get('clients/{id}', [ClientController::class, 'show'])->where(['id' => '[0-9]+'])->name('clients.show');
 
 Route::get('rooms', [RoomController::class, 'index'])->name('rooms.index');
