@@ -41,8 +41,9 @@ Route::get('users/{id}', [UserController::class, 'show'])->where(['id' => '[0-9]
 
 Route::get('clients', [ClientController::class, 'index'])->name('clients.index');
 Route::post('clients', [ClientController::class, 'store'])->name('clients.store');
-
+Route::put('clients', [ClientController::class, 'update'])->name('clients.update');
 Route::get('clients/create', [ClientController::class, 'create'])->name('clients.create');
+Route::get('clients/{id}/edit', [ClientController::class, 'edit'])->where(['id' => '[0-9]+'])->name('clients.edit');
 Route::get('clients/{id}', [ClientController::class, 'show'])->where(['id' => '[0-9]+'])->name('clients.show');
 
 Route::get('rooms', [RoomController::class, 'index'])->name('rooms.index');

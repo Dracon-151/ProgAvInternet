@@ -21,6 +21,7 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Phone Number</th>
+                            <th>Actions</th>
                         </thead>
                         <tbody>
                             @foreach($clients as $client)
@@ -28,6 +29,7 @@
                                 <td>{{$client->name}}</td>
                                 <td>{{$client->email}}</td>
                                 <td>{{$client->phone_number}}</td>
+                                <td><a class="btn btn-info" href="{{ route('clients.edit', $client->id) }}">Editar</a></td>
                             </tr>
                             @endforeach
                         </tbody>

@@ -16,17 +16,21 @@
             <br>
             <div class="row justify-content-md-center">
                 <div class="card py-4 px-5 col-md-6">
-                    <h2>Crear usuario</h2>
+                    <h2>Editar usuario</h2>
                     <br>
                     <p>Ingrese sus datos</p>
-                    <form action="{{route('clients.store')}}" method="POST">
+                    <form action="{{route('clients.update')}}" method="POST">
                       @csrf
+                      @method('PUT')
+
+                        <input value="{{$client->id}}" name="id" type="hidden">
+
                         <label for="name">Name</label>
                         <div class="input-group mb-2">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">A</span>
                             </div>
-                            <input class="form-control" type="text" name="name" placeholder="Name">
+                            <input value="{{$client->name}}" class="form-control" type="text" name="name" placeholder="Name">
                         </div>
 
                         <label for="phone_number">Phone Number</label>
@@ -34,7 +38,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">#</span>
                             </div>
-                            <input class="form-control" type="text" name="phone_number" placeholder="0000000">
+                            <input value="{{$client->phone_number}}" class="form-control" type="text" name="phone_number" placeholder="0000000">
                         </div>
 
                         <label for="email">Email</label>
@@ -42,12 +46,12 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">@</span>
                             </div>
-                            <input class="form-control" type="email" name="email" placeholder="email@gmail.com">
+                            <input value="{{$client->email}}" class="form-control" type="email" name="email" placeholder="email@gmail.com">
                         </div>
                         
                         <br>
                         <button type="submit" class="btn btn-success" name="action" value="access">
-                          Guardar
+                            Guardar
                         </button>
                 </div>
             </div>
