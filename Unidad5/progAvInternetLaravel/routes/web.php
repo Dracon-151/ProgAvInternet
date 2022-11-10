@@ -23,8 +23,12 @@ Route::get('/', function () {
 });
 
 Route::get('/login', function () {
-    return view('login');
+    return view('welcome');
 })->name('login');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
 
 Route::get('saludo', function () {
     echo "Hola";
